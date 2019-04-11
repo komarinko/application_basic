@@ -1,0 +1,29 @@
+<p class="success_message"><%= flash[:success] %></p>
+<h1>Books</h1>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Body</th>
+	</tr>
+
+	<% @bookers.each do |booker| %>
+	<tr>
+		<td><%= booker.title %></td>
+		<td><%= booker.body %></td>
+		<td><%= link_to "Show", booker_path(booker.id), class: "show_#{booker.id}" %></td>
+		<td><%= link_to "Edit", edit_booker_path(booker.id), class: "edit_#{booker.id}" %></td>
+		<td><%= link_to "Destroy", booker_path(booker.id), method: :delete, class: "destroy_#{booker.id}", "data-confirm" => "Are you sure?" %></td>
+	</tr>
+	<% end %>
+</table>
+
+<h2>New book</h2>
+<%= form_for(@booker) do |f| %>
+	<p>Title</p>
+	<%= f.text_field :title, class: "book_title" %>
+	<p>Body</p>
+	<%= f.text_area :body, class: "book_body" %>
+	<p>
+	<%= f.submit 'Create Book' %>
+	</p>
+<% end %>
